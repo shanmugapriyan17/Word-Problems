@@ -12,7 +12,7 @@ const [loading, setLoading] = useState(true)
 
 async function fetchProblems() {
 try {
-const res = await fetch('http://localhost:4000/api/problems')
+const res = await fetch('https://word-problems-u6u4.onrender.com')
 const data = await res.json()
 setProblems(data)
 } catch (err) {
