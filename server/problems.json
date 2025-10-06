@@ -1,0 +1,36 @@
+[
+  {
+    "id": 3,
+    "title": "gt",
+    "story": "ff",
+    "image": "",
+    "solution": "ji",
+    "steps": [
+      "hfhgfggh"
+    ]
+  },
+  {
+    "id": 1,
+    "title": "Apples in the basket",
+    "story": "If you have 3 apples and you get 2 more, how many apples do you have in total?",
+    "image": "",
+    "solution": "5",
+    "steps": [
+      "Start with 3 apples.",
+      "Add 2 more apples: 3 + 2 = 5.",
+      "Total = 5."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Sharing candies",
+    "story": "Riya has 12 candies. She wants to share them equally among 4 friends. How many candies does each friend get?",
+    "image": "",
+    "solution": "3",
+    "steps": [
+      "Start with 12 candies.",
+      "Divide by 4 friends: 12 ÷ 4 = 3.",
+      "Each friend gets 3 candies."
+    ]
+  }
+]
