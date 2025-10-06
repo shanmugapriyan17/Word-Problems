@@ -4,59 +4,59 @@ import Header from './components/Header';
 import ProblemCard from './components/ProblemCard';
 import ProblemBuilder from './components/ProblemBuilder';
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 export default function App() {
-const [problems, setProblems] = useState([])
-const [loading, setLoading] = useState(true)
+  const [problems, setProblems] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  async function fetchProblems() {
+    try {
+      const res = await fetch(`${API_URL}/api/problems`);
+      const data = await res.json();
+      setProblems(data);
+    } catch (err) {
+      console.error('failed to fetch problems', err);
+    } finally {
+      setLoading(false);
+    }
+  }
 
-async function fetchProblems() {
-try {
-const res = await fetch('https://word-problems-u6u4.onrender.com')
-const data = await res.json()
-setProblems(data)
-} catch (err) {
-console.error('failed to fetch problems', err)
-} finally {
-setLoading(false)
-}
-}
+  useEffect(() => {
+    fetchProblems();
+  }, []);
 
+  function addProblemToList(newProblem) {
+    setProblems((p) => [newProblem, ...p]);
+  }
 
-useEffect(() => { fetchProblems() }, [])
+  return (
+    <div className="app-root">
+      <Header />
 
+      <main className="page">
+        <section className="left">
+          <h2 className="section-title">Problems</h2>
+          {loading && <p className="muted">Loading...</p>}
+          {!loading && problems.length === 0 && (
+            <p className="muted">No problems yet. Create one below.</p>
+          )}
+          <div className="cards">
+            {problems.map((p) => (
+              <ProblemCard key={p.id} problem={p} />
+            ))}
+          </div>
+        </section>
 
-function addProblemToList(newProblem) {
-setProblems(p => [newProblem, ...p])
-}
+        <aside className="right">
+          <h2 className="section-title">Teacher: Build a problem</h2>
+          <ProblemBuilder onCreated={addProblemToList} />
+        </aside>
+      </main>
 
-
-return (
-<div className="app-root">
-<Header />
-
-
-<main className="page">
-<section className="left">
-<h2 className="section-title">Problems</h2>
-{loading && <p className="muted">Loading...</p>}
-{!loading && problems.length === 0 && <p className="muted">No problems yet. Create one below.</p>}
-<div className="cards">
-{problems.map(p => (
-<ProblemCard key={p.id} problem={p} />
-))}
-</div>
-</section>
-
-
-<aside className="right">
-<h2 className="section-title">Teacher: Build a problem</h2>
-<ProblemBuilder onCreated={addProblemToList} />
-</aside>
-</main>
-
-
-<footer className="site-footer">Made with ❤️ — Word Problems Demo</footer>
-</div>
-)
+      <footer className="site-footer">
+        Made with ❤️ — Word Problems Demo
+      </footer>
+    </div>
+  );
 }
